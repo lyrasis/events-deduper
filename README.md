@@ -51,7 +51,16 @@ delete the others.
 This query should help you find the problem:
 
 ```
-mysql> SELECT id, archival_object_id, event_id, role_id, COUNT(*)  as duplicates FROM `event_link_rlshp` GROUP BY archival_object_id, event_id, role_id;
+mysql> SELECT
+  id,
+  archival_object_id,
+  event_id,
+  role_id,
+  COUNT(*) as duplicates
+FROM `event_link_rlshp`
+GROUP BY archival_object_id, event_id, role_id
+HAVING duplicates > 1
+ORDER BY duplicates DESC;
 ```
 
 ## Warning
