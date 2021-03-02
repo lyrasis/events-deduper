@@ -2,6 +2,8 @@
 
 Deletes duplicate event relationships so you don't have to.
 
+Latest version tested: `v2.8.1`
+
 ## Whaaaaat, why?
 
 Right, this shouldn't be necessary. Having said that this can happen:
@@ -50,9 +52,8 @@ delete the others.
 
 This query should help you find the problem:
 
-```
-mysql> SELECT
-  id,
+```sql
+SELECT
   archival_object_id,
   event_id,
   role_id,
@@ -72,11 +73,10 @@ you do you use it at your own risk! You should do something like this:
 - create a backup
 - restore the backup in a test environment
 - confirm / reproduce your event issue
-- get a count of your event relationships
+- get a count of your event relationships: `SELECT count(*) FROM event_link_rlshp`
 - enable the plugin in test
 - fire up ArchivesSpace
-- check how many records the plugin deleted (logs)
-- confirm your event relationships count (pre - post)
+- check how many records the plugin deleted (rerun query and subtract remaining from total)
 - ArchivesSpace is indexing / working correctly?
 
 Assuming things are now ok after testing:
